@@ -1,36 +1,24 @@
 package se.iths.tictactoe;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameController {
+    public GameModel model = new GameModel();
+    public Button button1, button2, button3, button4, button5, button6, button7, button8, button9, resetScoreButton;
+    public List<Button> buttons = new ArrayList<>();
 
-    public Button resetScoreButton;
-    public Label playerScoreLabel;
-    public Label computerScoreLabel;
-    @FXML
-    private Button button1;
-    @FXML
-    private Button button2;
-    @FXML
-    private Button button3;
-    @FXML
-    private Button button4;
-    @FXML
-    private Button button5;
-    @FXML
-    private Button button6;
-    @FXML
-    private Button button7;
-    @FXML
-    private Button button8;
-    @FXML
-    private Button button9;
-
+    public GameModel getModel() {
+        return model;
+    }
 
     public void handleButtonClick(ActionEvent actionEvent) {
+        var tempButton = ((Button) actionEvent.getSource());
+        tempButton.setText("X");
+        tempButton.setDisable(true);
     }
 
     public void handleResetScoreClick(ActionEvent actionEvent) {
