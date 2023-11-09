@@ -35,11 +35,11 @@ public class GameController {
 
     public void handleCellButtonClick(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getSource();
-        model.setPlayerSymbol(clickedButton.getId());
+        model.playTurn(clickedButton.getId());
         clickedButton.setDisable(true);
     }
 
     public void handleResetScoreButtonClick(ActionEvent actionEvent) {
-        // todo
+        // TODO: Implement reset score functionality
     }
 }
