@@ -23,15 +23,15 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="button1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="100.0" />
-            <Button fx:id="button2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" />
-            <Button fx:id="button3" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" />
-            <Button fx:id="button4" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="1" />
-            <Button fx:id="button5" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="button6" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="button7" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="2" />
-            <Button fx:id="button8" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="button9" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="button1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCellButtonClick" prefHeight="100.0" prefWidth="100.0" />
+            <Button fx:id="button2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" />
+            <Button fx:id="button3" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" />
+            <Button fx:id="button4" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="1" />
+            <Button fx:id="button5" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="button6" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="button7" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="2" />
+            <Button fx:id="button8" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="button9" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Label alignment="CENTER" layoutX="185.0" layoutY="46.0" text="Tic Tac Toe" AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="40.0">
@@ -39,7 +39,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="resetScoreButton" layoutX="173.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleResetScoreClick" text="Reset score" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="159.5" AnchorPane.rightAnchor="159.5" />
+      <Button fx:id="resetScoreButton" layoutX="173.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleResetScoreButtonClick" text="Reset score" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="159.5" AnchorPane.rightAnchor="159.5" />
       <GridPane layoutX="109.0" layoutY="433.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -3,35 +3,43 @@ package se.iths.tictactoe;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class GameController {
     public GameModel model = new GameModel();
-    public Button button1, button2, button3, button4, button5, button6, button7, button8, button9, resetScoreButton;
-    public List<Button> buttons = new ArrayList<>();
-    private int currentPlayer;
+    public Button button1;
+    public Button button2;
+    public Button button3;
+    public Button button4;
+    public Button button5;
+    public Button button6;
+    public Button button7;
+    public Button button8;
+    public Button button9;
+    public Button resetScoreButton;
+
 
     public void initialize() {
-        currentPlayer = 0; // Index 0 corresponds to 'X', index 1 corresponds to '0'
-        buttons = Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9);
+        button1.textProperty().bindBidirectional(model.gameBoard[0]);
+        button2.textProperty().bindBidirectional(model.gameBoard[1]);
+        button3.textProperty().bindBidirectional(model.gameBoard[2]);
+        button4.textProperty().bindBidirectional(model.gameBoard[3]);
+        button5.textProperty().bindBidirectional(model.gameBoard[4]);
+        button6.textProperty().bindBidirectional(model.gameBoard[5]);
+        button7.textProperty().bindBidirectional(model.gameBoard[6]);
+        button8.textProperty().bindBidirectional(model.gameBoard[7]);
+        button9.textProperty().bindBidirectional(model.gameBoard[8]);
     }
 
     public GameModel getModel() {
         return model;
     }
 
-    public void handleButtonClick(ActionEvent actionEvent) {
+    public void handleCellButtonClick(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getSource();
-
-        clickedButton.setText((currentPlayer == 0 ? "X" : "O")); // update button text w current player
+        model.setPlayerSymbol(clickedButton.getId());
         clickedButton.setDisable(true);
-        currentPlayer = (currentPlayer + 1) % 2; //switch player
-
-
     }
 
-    public void handleResetScoreClick(ActionEvent actionEvent) {
+    public void handleResetScoreButtonClick(ActionEvent actionEvent) {
+        // todo
     }
 }
