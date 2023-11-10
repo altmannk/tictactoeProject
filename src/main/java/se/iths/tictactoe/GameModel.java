@@ -33,7 +33,12 @@ public class GameModel {
         int clickedButtonIndex = Integer.parseInt(clickedButtonId.substring(6));
         setSymbolOnBoard(clickedButtonIndex);
         checkForWinner();
-        changePlayer();
+
+        if (!isGameOver()) {
+            checkForTie();
+            changePlayer();
+        }
+        //changePlayer();
     }
 
     private void setSymbolOnBoard(int clickedButtonIndex) {
@@ -48,37 +53,62 @@ public class GameModel {
         currentPlayer = (currentPlayer + 1) % 2;
     }
 
-    public void checkForWinner() {
-        //check for horizontal winners
-        for (int i = 0; i < gameBoard.length; i += 3) {
-            if (!gameBoard[i].get().isEmpty() && gameBoard[i].get().equals(gameBoard[i+1].get())
-                    && gameBoard[i].get().equals(gameBoard[i+2].get())) {
-                // TODO: update player score label
-                System.out.println("winner horizontal"); // TODO: replace with winner label
-            }
+    private boolean isGameOver() {
+        return checkForWinner() || checkForTie();
+    }
 
-        }
+    public boolean checkForWinner() {
+        //check for horizontal winners
+        boolean horizontalWinner = checkForHorizontalWinner();
+
         //check for vertical winners
-        for (int i = 0; i < 3; i++) {
-            if (!gameBoard[i].get().isEmpty() && gameBoard[i].get().equals(gameBoard[i+3].get())
-                    && gameBoard[i].get().equals(gameBoard[i+6].get())) {
-                System.out.println("winner vertical"); // TODO: replace with winner label
-            }
-        }
+        boolean verticalWinner = checkForVerticalWinner();
 
         //check for diagonal winners
+        boolean diagonalWinner = checkForDiagonalWinner();
+
+        return horizontalWinner || verticalWinner || diagonalWinner;
+
+        //check for tie
+//        if(checkForTie()) {
+//            System.out.println("tie!"); // TODO: replace with tie label
+//        }
+
+    }
+
+    private boolean checkForDiagonalWinner() {
         if (!gameBoard[0].get().isEmpty() && gameBoard[0].get().equals(gameBoard[4].get())
                 && gameBoard[0].get().equals(gameBoard[8].get()) ||
                 !gameBoard[2].get().isEmpty() && gameBoard[2].get().equals(gameBoard[4].get())
                 && gameBoard[2].get().equals(gameBoard[6].get())) {
             System.out.println("winner diagonal"); // TODO: replace with winner label
+            return true;
         }
+        return false;
+    }
 
-        //check for tie
-        if(checkForTie()) {
-            System.out.println("tie!"); // TODO: replace with tie label
+    private boolean checkForVerticalWinner() {
+        for (int i = 0; i < 3; i++) {
+            if (!gameBoard[i].get().isEmpty() && gameBoard[i].get().equals(gameBoard[i+3].get())
+                    && gameBoard[i].get().equals(gameBoard[i+6].get())) {
+                System.out.println("winner vertical"); // TODO: replace with winner label
+                return true;
+            }
         }
+        return false;
+    }
 
+    private boolean checkForHorizontalWinner() {
+        for (int i = 0; i < gameBoard.length; i += 3) {
+
+            if (!gameBoard[i].get().isEmpty() && gameBoard[i].get().equals(gameBoard[i+1].get())
+                    && gameBoard[i].get().equals(gameBoard[i+2].get())) {
+                // TODO: update player score label
+                System.out.println("winner horizontal");// TODO: replace with winner label
+                return true;
+            }
+        }
+        return false;
     }
 
     /*
@@ -92,6 +122,7 @@ public class GameModel {
                 return false; // returns false if the board is not full aka not a tie
             }
         }
+        System.out.println("Tie!");
         return true; //returns true if all cells are filled aka it's a tie
     }
 }
