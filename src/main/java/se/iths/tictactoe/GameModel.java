@@ -29,6 +29,14 @@ public class GameModel {
         return computerScore;
     }
 
+    public void setPlayerScore(int playerScore) {
+        this.playerScore = playerScore;
+    }
+
+    public void setComputerScore(int computerScore) {
+        this.computerScore = computerScore;
+    }
+
     public void playTurn(String clickedButtonId) {
         int clickedButtonIndex = Integer.parseInt(clickedButtonId.substring(6));
         setSymbolOnBoard(clickedButtonIndex);
@@ -94,6 +102,8 @@ public class GameModel {
         }
         return true; //returns true if all cells are filled aka it's a tie
     }
+
+
 }
 
 

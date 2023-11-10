@@ -51,14 +51,12 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Player:" />
-                  <Label text="${controller.model.playerScore}" />
+                  <Label fx:id="playerWinsLabel" text="Player:" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label text="Computer:" />
-                  <Label text="${controller.model.computerScore}" />
+                  <Label fx:id="computerWinsLabel" text="Computer:" />
                </children>
             </HBox>
          </children>
