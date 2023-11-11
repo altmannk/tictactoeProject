@@ -13,19 +13,24 @@ public class GameModel {
     private int playerO = -1;
     private int emptyCell = 0;
     private int currentPlayer = playerX; // Index 0 corresponds to 'X', index 1 corresponds to 'O'
-    private boolean isFirstMove = true;
+    private boolean gameEnd;
+    private String winner = "";
+    private String playerSymbolX = "X";
+    private String computerSymbolO = "O";
+
 
     public GameModel() {
         gameBoard = new int[9];
         makeGameBoard();
     }
 
-    private void makeGameBoard() {
+    public void makeGameBoard() {
         Arrays.fill(gameBoard, emptyCell);
     }
 
     public void playTurn(int clickedButtonIndex) {
         setSymbolOnBoard(clickedButtonIndex);
+        checkForWinner();
         changePlayer();
 
     }
@@ -36,73 +41,84 @@ public class GameModel {
     }
 
     public String getCurrentsPlayerSymbol() {
-        return currentPlayer == playerX ? "X" : "O";
+        return currentPlayer == playerO ? "X" : "O";
     }
 
     private void changePlayer() {
-        if (isFirstMove) {
-            isFirstMove = false;
-        } else {
-            currentPlayer = (currentPlayer == playerX) ? playerO : playerX;
+        currentPlayer = (currentPlayer == playerO) ? playerX : playerO;
+    }
+
+    public void checkForWinner() {
+        // horizontal winner
+        for (int i = 0; i < gameBoard.length; i += 3) {
+            if (gameBoard[i] != emptyCell && gameBoard[i] == gameBoard[i + 1] && gameBoard[i] == gameBoard[i + 2])
+                foundWinner(gameBoard[i]);
+        }
+
+        // vertical winner
+        for (int i = 0; i < 3; i++) {
+            if (gameBoard[i] != emptyCell && gameBoard[i] == gameBoard[i + 3] && gameBoard[i] == gameBoard[i + 6])
+                foundWinner(gameBoard[i]);
+        }
+
+        // diagonal winner
+        if (gameBoard[0] != emptyCell && gameBoard[0] == gameBoard[4] && gameBoard[0] == gameBoard[8])
+            foundWinner(gameBoard[0]);
+        if (gameBoard[2] != emptyCell && gameBoard[2] == gameBoard[4] && gameBoard[2] == gameBoard[6])
+            foundWinner(gameBoard[2]);
+
+
+        if (checkForTie()) {
+            foundWinner(emptyCell);
+            System.out.println("Tie!");
         }
     }
 
+    private boolean checkForTie() {
+        if (winner.equals(playerSymbolX) || winner.equals(computerSymbolO))
+            return false;
 
-
-//    public void checkForWinner() {
-//        //check for horizontal winners
-//        for (int i = 0; i < gameBoard.length; i += 3) {
-//            if (!gameBoard[i].get().isEmpty() && gameBoard[i].get().equals(gameBoard[i + 1].get())
-//                    && gameBoard[i].get().equals(gameBoard[i + 2].get())) {
-//                // TODO: update player score label
-//                System.out.println("winner horizontal"); // TODO: replace with winner label
-//            }
-//
-//        }
-//        //check for vertical winners
-//        for (int i = 0; i < 3; i++) {
-//            if (!gameBoard[i].get().isEmpty() && gameBoard[i].get().equals(gameBoard[i + 3].get())
-//                    && gameBoard[i].get().equals(gameBoard[i + 6].get())) {
-//                System.out.println("winner vertical"); // TODO: replace with winner label
-//            }
-//        }
-//
-//        //check for diagonal winners
-//        if (!gameBoard[0].get().isEmpty() && gameBoard[0].get().equals(gameBoard[4].get())
-//                && gameBoard[0].get().equals(gameBoard[8].get()) ||
-//                !gameBoard[2].get().isEmpty() && gameBoard[2].get().equals(gameBoard[4].get())
-//                        && gameBoard[2].get().equals(gameBoard[6].get())) {
-//            System.out.println("winner diagonal"); // TODO: replace with winner label
-//        }
-//
-//        //check for tie
-//        if (checkForTie()) {
-//            System.out.println("tie!"); // TODO: replace with tie label
-//        }
-//
-//    }
-
-    /*
-     * NOTE TO MYSELF
-     * Something wrong. If the board is full and also have a winner then it's both winner and tie.
-     * Maybe I should have something for if the game is over/not over and check for tie?
-     */
-
-//    private boolean checkForTie() {
-//        for (StringProperty index : gameBoard) {
-//            if (index != null && index.get().isEmpty()) {
-//                return false; // returns false if the board is not full aka not a tie
-//            }
-//        }
-//        return true; //returns true if all cells are filled aka it's a tie
-//    }
-
-    public int getPlayerScore() {
-        return playerScore;
+        for (int cell : gameBoard) {
+            if (cell == emptyCell)
+                return false;
+        }
+        return true;
     }
 
-    public int getComputerScore() {
-        return computerScore;
+    public void foundWinner(int winner) {
+        if (winner == playerX) {
+            playerScore++;
+            setWinner(playerSymbolX);
+        } else if (winner == playerO) {
+            computerScore++;
+            setWinner(computerSymbolO);
+        } else
+            setWinner("tie");
+        gameEnd = true;
+    }
+
+    public boolean isGameEnd() {
+        return gameEnd;
+    }
+
+    public String getPlayerScore() {
+        return String.valueOf(playerScore);
+    }
+
+    public String getComputerScore() {
+        return String.valueOf(computerScore);
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public int getPlayerX() {
+        return playerX;
+    }
+
+    public void setGameEnd(boolean gameEnd) {
+        this.gameEnd = gameEnd;
     }
 
     public void setPlayerScore(int playerScore) {
@@ -113,6 +129,13 @@ public class GameModel {
         this.computerScore = computerScore;
     }
 
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
 }
 
 
