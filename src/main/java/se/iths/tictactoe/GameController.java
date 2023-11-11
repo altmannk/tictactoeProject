@@ -46,7 +46,9 @@ public class GameController {
     @FXML
     private void handleCellButtonClick(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getSource();
-        model.playTurn(clickedButton.getId());
+        int buttonIndex = buttons.indexOf(clickedButton);
+        model.playTurn(buttonIndex);
+        clickedButton.setText(model.getCurrentsPlayerSymbol());
         clickedButton.setDisable(true);
     }
 
