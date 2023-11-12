@@ -38,7 +38,7 @@ public class GameModel {
         int buttonNumber;
 
         do {
-            buttonNumber = random.nextInt(9);
+            buttonNumber = random.nextInt(0,8);
             System.out.println("loop");
         } while (gameBoard[buttonNumber] != emptyCell);
         return buttonNumber;
@@ -61,6 +61,7 @@ public class GameModel {
         for (int i = 0; i < gameBoard.length; i += 3) {
             if (gameBoard[i] != emptyCell && gameBoard[i] == gameBoard[i + 1] && gameBoard[i] == gameBoard[i + 2]) {
                 foundWinner(gameBoard[i]);
+                return;
             }
         }
 
@@ -68,15 +69,18 @@ public class GameModel {
         for (int i = 0; i < 3; i++) {
             if (gameBoard[i] != emptyCell && gameBoard[i] == gameBoard[i + 3] && gameBoard[i] == gameBoard[i + 6]) {
                 foundWinner(gameBoard[i]);
+                return;
             }
         }
 
         // diagonal winner
         if (gameBoard[0] != emptyCell && gameBoard[0] == gameBoard[4] && gameBoard[0] == gameBoard[8]) {
             foundWinner(gameBoard[0]);
+            return;
         }
         if (gameBoard[2] != emptyCell && gameBoard[2] == gameBoard[4] && gameBoard[2] == gameBoard[6]) {
             foundWinner(gameBoard[2]);
+            return;
         }
 
 
