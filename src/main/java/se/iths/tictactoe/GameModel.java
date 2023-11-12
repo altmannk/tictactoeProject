@@ -1,9 +1,7 @@
 package se.iths.tictactoe;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 import java.util.Arrays;
+import java.util.Random;
 
 public class GameModel {
     public int[] gameBoard;
@@ -12,12 +10,12 @@ public class GameModel {
     private int playerX = 1;
     private int playerO = -1;
     private int emptyCell = 0;
-    private int currentPlayer = playerX; // Index 0 corresponds to 'X', index 1 corresponds to 'O'
+    private int currentPlayer = playerX; // Index 1 corresponds to 'X', index -1 corresponds to 'O'
     private boolean gameEnd;
     private String winner = "";
-    private String playerSymbolX = "X";
-    private String computerSymbolO = "O";
-
+    private final String playerSymbolX = "X";
+    private final String computerSymbolO = "O";
+    private Random random = new Random();
 
     public GameModel() {
         gameBoard = new int[9];
@@ -29,15 +27,25 @@ public class GameModel {
     }
 
     public void playTurn(int clickedButtonIndex) {
-        setSymbolOnBoard(clickedButtonIndex);
-        checkForWinner();
-        changePlayer();
+        if (!gameEnd && gameBoard[clickedButtonIndex] == emptyCell) {
+            setSymbolOnBoard(clickedButtonIndex);
+            checkForWinner();
+            changePlayer();
+        }
+    }
 
+    public int computerTurn() {
+        int buttonNumber;
+
+        do {
+            buttonNumber = random.nextInt(9);
+            System.out.println("loop");
+        } while (gameBoard[buttonNumber] != emptyCell);
+        return buttonNumber;
     }
 
     private void setSymbolOnBoard(int clickedButtonIndex) {
         gameBoard[clickedButtonIndex] = currentPlayer;
-
     }
 
     public String getCurrentsPlayerSymbol() {
@@ -51,30 +59,33 @@ public class GameModel {
     public void checkForWinner() {
         // horizontal winner
         for (int i = 0; i < gameBoard.length; i += 3) {
-            if (gameBoard[i] != emptyCell && gameBoard[i] == gameBoard[i + 1] && gameBoard[i] == gameBoard[i + 2])
+            if (gameBoard[i] != emptyCell && gameBoard[i] == gameBoard[i + 1] && gameBoard[i] == gameBoard[i + 2]) {
                 foundWinner(gameBoard[i]);
+            }
         }
 
         // vertical winner
         for (int i = 0; i < 3; i++) {
-            if (gameBoard[i] != emptyCell && gameBoard[i] == gameBoard[i + 3] && gameBoard[i] == gameBoard[i + 6])
+            if (gameBoard[i] != emptyCell && gameBoard[i] == gameBoard[i + 3] && gameBoard[i] == gameBoard[i + 6]) {
                 foundWinner(gameBoard[i]);
+            }
         }
 
         // diagonal winner
-        if (gameBoard[0] != emptyCell && gameBoard[0] == gameBoard[4] && gameBoard[0] == gameBoard[8])
+        if (gameBoard[0] != emptyCell && gameBoard[0] == gameBoard[4] && gameBoard[0] == gameBoard[8]) {
             foundWinner(gameBoard[0]);
-        if (gameBoard[2] != emptyCell && gameBoard[2] == gameBoard[4] && gameBoard[2] == gameBoard[6])
+        }
+        if (gameBoard[2] != emptyCell && gameBoard[2] == gameBoard[4] && gameBoard[2] == gameBoard[6]) {
             foundWinner(gameBoard[2]);
+        }
 
 
-        if (checkForTie()) {
+        if (isBoardFull()) {
             foundWinner(emptyCell);
-            System.out.println("Tie!");
         }
     }
 
-    private boolean checkForTie() {
+    private boolean isBoardFull() {
         if (winner.equals(playerSymbolX) || winner.equals(computerSymbolO))
             return false;
 
@@ -88,12 +99,13 @@ public class GameModel {
     public void foundWinner(int winner) {
         if (winner == playerX) {
             playerScore++;
-            setWinner(playerSymbolX);
+            setWinner("Winner is " + playerSymbolX);
         } else if (winner == playerO) {
             computerScore++;
-            setWinner(computerSymbolO);
-        } else
-            setWinner("tie");
+            setWinner("Winner is " + computerSymbolO);
+        } else if (winner == emptyCell) {
+            setWinner("It's a tie!");
+        }
         gameEnd = true;
     }
 
@@ -137,8 +149,3 @@ public class GameModel {
         this.currentPlayer = currentPlayer;
     }
 }
-
-
-
-
-

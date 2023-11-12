@@ -11,18 +11,14 @@ import java.util.List;
 public class GameController {
     private static final GameModel model = new GameModel();
     @FXML
-    private Label headerLabel;
-    @FXML
     private Button
-            button1, button2, button3,
-            button4, button5, button6,
-            button7, button8, button9;
+                button1, button2, button3,
+                button4, button5, button6,
+                button7, button8, button9;
     @FXML
     private static List<Button> buttons;
     @FXML
-    private Button resetScoreButton;
-    @FXML
-    private Button playAgain;
+    private Label headerLabel;
     @FXML
     private Label playerWinsLabel;
     @FXML
@@ -46,6 +42,10 @@ public class GameController {
         clickedButton.setDisable(true);
 
         updateGame();
+        if (!model.isGameEnd()) {
+            computerTurn();
+            updateGame();
+        }
     }
 
     @FXML
@@ -66,16 +66,23 @@ public class GameController {
         updateScoreBoard();
     }
 
+    private void computerTurn() {
+        int buttonIndex = model.computerTurn();
+        model.playTurn(buttonIndex);
+        buttons.get(buttonIndex).setText(model.getCurrentsPlayerSymbol());
+        buttons.get(buttonIndex).setDisable(true);
+    }
+
     private void updateScoreBoard() {
         playerWinsLabel.setText("Player: " + model.getPlayerScore());
         computerWinsLabel.setText("Computer: " + model.getComputerScore());
     }
 
     private void updateGame() {
-        if (model.isGameEnd()){
+        if (model.isGameEnd()) {
             disableButtons();
             updateScoreBoard();
-            headerLabel.setText("Winner is " + model.getWinner());
+            headerLabel.setText(model.getWinner());
         }
     }
 
