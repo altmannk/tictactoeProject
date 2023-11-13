@@ -9,14 +9,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GameController {
+    // GameModel instance
     private static final GameModel model = new GameModel();
+
+    // FXML elements for the game interface
     @FXML
     private Button
                 button1, button2, button3,
                 button4, button5, button6,
                 button7, button8, button9;
     @FXML
-    private static List<Button> buttons;
+    private static List<Button> gameButtons;
     @FXML
     private Label headerLabel;
     @FXML
@@ -24,30 +27,33 @@ public class GameController {
     @FXML
     private Label computerWinsLabel;
 
-
+    // Initializes the buttons for the game
     public void initialize() {
-        buttons = Arrays.asList(
+        gameButtons = Arrays.asList(
                 button1, button2, button3,
                 button4, button5, button6,
                 button7, button8, button9
         );
     }
 
+    // Handles player move
     @FXML
-    private void onCellButtonClick(ActionEvent actionEvent) {
+    private void onHandleButtonClick(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getSource();
-        int buttonIndex = buttons.indexOf(clickedButton);
+        int buttonIndex = gameButtons.indexOf(clickedButton);
+        // Update the game model with the players move
         model.playTurn(buttonIndex);
         clickedButton.setText(model.getCurrentsPlayerSymbol());
         clickedButton.setDisable(true);
-
-        updateGame();
+        updateGameStateUI();
+        // If the game is still on, initiate the computer's move
         if (!model.isGameEnd()) {
-            computerTurn();
-            updateGame();
+            initiateComputerTurn();
+            updateGameStateUI();
         }
     }
 
+    // Resets the score and initiates a new game
     @FXML
     private void onResetScoreButtonClick() {
         model.setPlayerScore(0);
@@ -55,6 +61,7 @@ public class GameController {
         onPlayAgain();
     }
 
+    //Resets the game state for a new game
     @FXML
     private void onPlayAgain() {
         model.makeGameBoard();
@@ -66,19 +73,22 @@ public class GameController {
         updateScoreBoard();
     }
 
-    private void computerTurn() {
+    // Initiates the computers move
+    private void initiateComputerTurn() {
         int buttonIndex = model.computerTurn();
         model.playTurn(buttonIndex);
-        buttons.get(buttonIndex).setText(model.getCurrentsPlayerSymbol());
-        buttons.get(buttonIndex).setDisable(true);
+        gameButtons.get(buttonIndex).setText(model.getCurrentsPlayerSymbol());
+        gameButtons.get(buttonIndex).setDisable(true);
     }
 
+    // Updates the display score
     private void updateScoreBoard() {
         playerWinsLabel.setText("Player: " + model.getPlayerScore());
         computerWinsLabel.setText("Computer: " + model.getComputerScore());
     }
 
-    private void updateGame() {
+    // Updates the game state and UI
+    private void updateGameStateUI() {
         if (model.isGameEnd()) {
             disableButtons();
             updateScoreBoard();
@@ -86,14 +96,16 @@ public class GameController {
         }
     }
 
+    // Disables all buttons
     private void disableButtons() {
-        for (Button button : buttons) {
+        for (Button button : gameButtons) {
             button.setDisable(true);
         }
     }
 
+    // Enables all buttons and resets their text
     private void enableButtons() {
-        for (Button button : buttons) {
+        for (Button button : gameButtons) {
             button.setText("");
             button.setDisable(false);
         }

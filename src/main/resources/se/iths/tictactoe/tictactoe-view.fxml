@@ -19,15 +19,15 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="button1" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCellButtonClick" prefHeight="100.0" prefWidth="100.0" />
-            <Button fx:id="button2" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" />
-            <Button fx:id="button3" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" />
-            <Button fx:id="button4" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="1" />
-            <Button fx:id="button5" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="button6" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="button7" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="2" />
-            <Button fx:id="button8" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="button9" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCellButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="button1" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onHandleButtonClick" prefHeight="100.0" prefWidth="100.0" />
+            <Button fx:id="button2" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onHandleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" />
+            <Button fx:id="button3" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onHandleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" />
+            <Button fx:id="button4" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onHandleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="1" />
+            <Button fx:id="button5" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onHandleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="button6" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onHandleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="button7" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onHandleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="2" />
+            <Button fx:id="button8" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onHandleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="button9" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onHandleButtonClick" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Label fx:id="headerLabel" alignment="CENTER" layoutX="1.0" layoutY="46.0" prefHeight="35.0" prefWidth="400.0" text="Tic Tac Toe" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="40.0">
@@ -35,6 +35,8 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Button fx:id="resetScoreButton" focusTraversable="false" layoutX="106.0" layoutY="526.0" mnemonicParsing="false" onAction="#onResetScoreButtonClick" text="Reset score" />
+      <Button fx:id="playAgain" focusTraversable="false" layoutX="218.0" layoutY="526.0" mnemonicParsing="false" onAction="#onPlayAgain" text="Play Again" />
       <GridPane layoutX="109.0" layoutY="433.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -46,25 +48,21 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="playerWinsLabel" text="Player: 0" />
+                  <Label fx:id="playerWinsLabel" text="Player: 0">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin></Label>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label fx:id="computerWinsLabel" text="Computer: 0" />
+                  <Label fx:id="computerWinsLabel" text="Computer: 0">
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin></Label>
                </children>
             </HBox>
          </children>
       </GridPane>
-      <HBox layoutX="53.0" layoutY="523.0" prefHeight="75.0" prefWidth="300.0">
-         <children>
-            <Button fx:id="resetScoreButton" focusTraversable="false" mnemonicParsing="false" onAction="#onResetScoreButtonClick" text="Reset score" />
-            <Button fx:id="playAgain" focusTraversable="false" mnemonicParsing="false" onAction="#onPlayAgain" text="Play Again">
-               <HBox.margin>
-                  <Insets left="15.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
    </children>
 </AnchorPane>
