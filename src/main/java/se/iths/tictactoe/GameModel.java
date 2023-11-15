@@ -53,7 +53,7 @@ public class GameModel {
     }
 
     // Places the "symbol" (1 or -1) on the board
-    private void setSymbolOnBoard(int clickedButtonIndex) {
+    public void setSymbolOnBoard(int clickedButtonIndex) {
         gameBoard[clickedButtonIndex] = currentPlayer;
     }
 
@@ -63,7 +63,7 @@ public class GameModel {
     }
 
     // Changes the player after each turn
-    private void changePlayer() {
+    public void changePlayer() {
         currentPlayer = (currentPlayer == playerO) ? playerX : playerO;
     }
 
@@ -102,7 +102,7 @@ public class GameModel {
     }
 
     // Checks if the game board is full
-    private boolean isBoardFull() {
+    public boolean isBoardFull() {
         if (winner.equals(playerSymbolX) || winner.equals(computerSymbolO))
             return false;
 
