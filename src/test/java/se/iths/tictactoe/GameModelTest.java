@@ -4,9 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Test for GameModel class")
 class GameModelTest {
@@ -35,6 +33,56 @@ class GameModelTest {
 
         assertThat(gameModel.gameBoard[0]).isEqualTo(gameModel.getPlayerX()); //brädan bör bli oförändrad
     }
+
+    @Test
+    @DisplayName("Check for horizontal winner")
+    void checkForHorizontalWinner() {
+        //Arrange/Given a combination for horizontal winning
+        gameModel.setSymbolOnBoard(0);
+        gameModel.setSymbolOnBoard(1);
+        gameModel.setSymbolOnBoard(2);
+
+        //Act/When checking for winner
+        gameModel.checkForWinner();
+
+        //Assert/Then game should end and the winner should be X
+        assertThat(gameModel.isGameEnd()).isTrue();
+        assertThat(gameModel.getWinner()).isEqualTo("Winner is X");
+    }
+
+    @Test
+    @DisplayName("Check for vertical winner")
+    void checkForVerticalWinner() {
+        //Arrange/Given a combination for vertical winning
+        gameModel.setSymbolOnBoard(0);
+        gameModel.setSymbolOnBoard(3);
+        gameModel.setSymbolOnBoard(6);
+
+        //Act/When checking for winner
+        gameModel.checkForWinner();
+
+        //Assert/Then game should end and the winner should be X
+        assertThat(gameModel.isGameEnd()).isTrue();
+        assertThat(gameModel.getWinner()).isEqualTo("Winner is X");
+    }
+
+    @Test
+    @DisplayName("Check for diagonal winner")
+    void checkForDiagonalWinner() {
+        //Arrange/Given a combination for diagonal winning
+        gameModel.setSymbolOnBoard(0);
+        gameModel.setSymbolOnBoard(4);
+        gameModel.setSymbolOnBoard(8);
+
+        //Act/When checking for winner
+        gameModel.checkForWinner();
+
+        //Assert/Then game should end and the winner should be X
+        assertThat(gameModel.isGameEnd()).isTrue();
+        assertThat(gameModel.getWinner()).isEqualTo("Winner is X");
+    }
+
+
 
 
 
