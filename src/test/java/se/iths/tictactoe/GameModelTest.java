@@ -27,6 +27,14 @@ class GameModelTest {
         assertThat(gameModel.gameBoard[0]).isEqualTo(gameModel.getPlayerX()); //då ska symbolen sättas på spelbrädan
     }
 
+    @Test
+    @DisplayName("Check if player move is invalid")
+    void checkIfPlayerMoveIsInvalid() {
+        gameModel.playTurn(0); // spelarsymbol sätts på cell 0
+        gameModel.playTurn(0); // nästa drag placerar symbol på redan upptagen cell
+
+        assertThat(gameModel.gameBoard[0]).isEqualTo(gameModel.getPlayerX()); //brädan bör bli oförändrad
+    }
 
 
 
