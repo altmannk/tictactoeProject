@@ -20,14 +20,14 @@ class GameModelTest {
     }
 
     @Test
-    @DisplayName("")
-    void firstTestDoesNothing(){
-        //Arrange
+    @DisplayName("Check if player move is valid")
+    void checkIfPlayerMoveIsValid(){
+        gameModel.playTurn(0); //när spelarsymbol sätts på cell 0
 
-        // Act
-
-        // Assert
+        assertThat(gameModel.gameBoard[0]).isEqualTo(gameModel.getPlayerX()); //då ska symbolen sättas på spelbrädan
     }
+
+
 
 
 }
